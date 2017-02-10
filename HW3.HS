@@ -66,8 +66,11 @@ cmd (Move c d) (Up, _) = ((Up, (c, d)), Nothing)
 --
 --   >>> prog (steps 2 0 0) start
 --   ((Down,(2,2)),[((0,0),(0,1)),((0,1),(1,1)),((1,1),(1,2)),((1,2),(2,2))])
-prog :: Prog -> State -> (State, [Line])
-prog = undefined
+prog [] state = (state, [])
+prog (command:commands) state =
+  let (newState, maybeLine) = cmd command state
+      (fState, linesLeftOver) = prog commands newState
+  in (fState, maybe linesLeftOver (: linesLeftOver) maybeLine)
 
 
 --

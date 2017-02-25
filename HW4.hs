@@ -5,6 +5,7 @@ import Data.Function (fix)
 
 import KarelSyntax
 import KarelState
+import KarelExamples
 
 test (Not t)    w r = not (test t w r)
 test (Facing c) _ r = c == getFacing r

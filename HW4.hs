@@ -49,14 +49,4 @@ stmt (While t b)    d w r = if test t w r then case stmt b d w r of
 
 -- | Run a Karel program.
 prog :: Prog -> World -> Robot -> Result
-prog (m,s) w r = stmt s m w r
-	 
-stmt (Block [])_world robot = OK world robot
-stmt (Block (statement:statements)) defs world robot =
-  case stmt statement defs world robot of
-    OK newWorld newRobot -> stmt (Block statements) defs newWorld newRobot
-	result -> result
-    
--- | Run a Karel program.
-prog :: Prog -> World -> Robot -> Result
-prog (m,s) w r = stmt s m w r
+prog (m,s) w r = stmt s m w r	
